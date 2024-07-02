@@ -28,3 +28,11 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+# Função das Keys
+Elas servem para evitar que aplicaçcão renerize novamente o mesmo componente, renderizarar apenas, os novos(usar Id do Objeto)
+
+# Pasta @types
+Esta serve para que possa tipar a classe, para que a mesma reconheça seus atributos ao -> autocompletar
+
