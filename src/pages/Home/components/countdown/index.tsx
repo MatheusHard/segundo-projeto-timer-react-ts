@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { CronometroContainer, Separator } from "./styles";
 import { differenceInSeconds } from "date-fns";
-import { CyclesContext } from "../..";
+import { CyclesContext } from "../../../../context/CyclesContext";
 
 interface CountDownProps {
     activeCycle: any

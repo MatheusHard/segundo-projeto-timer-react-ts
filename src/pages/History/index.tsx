@@ -1,6 +1,14 @@
+import { useContext } from "react";
 import { HistoryContainer, HistoryTableList, StatusTask } from "./styles";
+import { CyclesContext } from "../../context/CyclesContext";
+import { ptBR } from "date-fns/locale";
+import { formatDistanceToNow } from "date-fns";
 
 export function History() {
+
+    const { cycles } = useContext(CyclesContext)
+
+    console.log('Cicros', cycles)
     return (
         <HistoryContainer>
             <h1>History</h1>
@@ -17,30 +25,33 @@ export function History() {
                     </thead>
                     {/*Corpo da Table:*/}
                     <tbody>
-                        <tr>
-                            <td>Task 01</td>
-                            <td>20 min</td>
-                            <td>Há 2 anos</td>
-                            <td>
-                                <StatusTask statusColor="green">Concluida</StatusTask>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Task 02</td>
-                            <td>10 min</td>
-                            <td>Há 2 semans</td>
-                            <td>
-                                <StatusTask statusColor="yellow">Em Andamento</StatusTask>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Task 03</td>
-                            <td>1 min</td>
-                            <td>Há 30 segundos</td>
-                            <td>
-                                <StatusTask statusColor="red">Pobremas</StatusTask>
-                            </td>
-                        </tr>
+                      {cycles.map(cycle => {
+                        return (
+                            <tr key={cycle.id}>
+                                <td>{cycle.task}</td>
+                                <td>{cycle.minutes} min</td>
+                                <td>{formatDistanceToNow(cycle.startDate, {
+                                        addSuffix: true,
+                                        locale: ptBR
+                                        }
+                                    
+                                )}</td>
+                                <td>
+                                    {
+                                      cycle.finishedDate && (<StatusTask statusColor="green">Concruidio</StatusTask>)
+                                    }
+                                    {
+                                      cycle.iterrutedDate && (<StatusTask statusColor="red">Parado</StatusTask>)
+                                    }
+                                    {
+                                      !cycle.finishedDate && !cycle.iterrutedDate && (<StatusTask statusColor="yellow">Andamentio</StatusTask>)
+                                    }
+                                    
+                                </td>
+                            </tr>
+                        )
+                      })}
+                       
                     </tbody>
                 </table>
             </HistoryTableList>
